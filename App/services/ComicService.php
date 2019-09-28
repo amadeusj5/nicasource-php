@@ -61,6 +61,16 @@ class ComicService
      */
     private function transform(array $comic, int $comic_id = null)
     {
+        if (empty($comic)) {
+            $previous_comic_id = $this->getPreviouslyRequestedComicId();
+
+            if (is_null($previous_comic_id) || $previous_comic_id < $comic_id) {
+                $this->abortTo('/comic/' . ($comic_id + 1));
+            }
+
+            $this->abortTo('/comic/' . ($comic_id - 1));
+        }
+
         return [
             'comic' => $comic,
             'previous' => $this->previousComicUrl($comic_id, $comic),
@@ -102,5 +112,32 @@ class ComicService
 
         $next_comic_id = $comic_id + 1;
         return "/comic/$next_comic_id";
+    }
+
+    /**
+     * @return null|int
+     */
+    private function getPreviouslyRequestedComicId()
+    {
+        $url = $this->httpClient()->getPreviousRequest();
+
+        if (empty($url)) {
+            return null;
+        }
+
+        $path = explode('/', parse_url($url, PHP_URL_PATH));
+
+        return end($path);
+    }
+
+    /**
+     * Abort Comic, redirect and die
+     *
+     * @param string $url
+     */
+    protected function abortTo($url)
+    {
+        header("Location: $url");
+        die;
     }
 }

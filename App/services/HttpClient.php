@@ -35,4 +35,12 @@ class HttpService
 
         return json_decode(self::$data, true);
     }
+
+    /**
+     * @return string
+     */
+    public function getPreviousRequest()
+    {
+        return $_SERVER['HTTP_REFERER'] ?? "";
+    }
 }
