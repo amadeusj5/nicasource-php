@@ -18,49 +18,58 @@ $next = $comic_object['next'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>XKCD - <?php echo $comic['title'] ?></title>
+    <link rel="shortcut icon" href="/xkcd.ico" type="image/x-icon">
 
-    <!-- Fonts and icons     -->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 py-5">
-                <h1 class="h3">XKCD</h1>
-
-                <div>
-                    <h4><?php echo $comic["title"] ?></h4>
-                    <div class="mb-1">
-                        <img src="<?php echo $comic['img'] ?>" class="img-fluid" alt="<?php echo $comic['safe_title'] ?>">
+        <div class="justify-content-center row">
+            <div class="col-md-7">
+                <div class="card my-5 rounded-lg shadow-lg">
+                    <div class="bg-white border-0 card-header pt-4 text-center">
+                        <h3 class="font-weight-bold mb-0">XKCD</h3>
+                        <p class="mb-0 text-muted">
+                            A webcomic of romance, sarcasm, math, and language.
+                        </p>
                     </div>
-                    <p class="mt-3">
-                        <small><?php echo $comic['alt'] ?></small>
-                    </p>
-                </div>
-                <div>
-                    <div class="wizard-footer clearfix">
-                        <?php if ($previous) : ?>
-                            <a href="<?php echo $previous ?>" class="btn btn-previous btn-fill btn-primary btn-wd btn-sm" title="previous">
-                                <span class="mr-2">
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                </span>
-                                Previous
-                            </a>
-                        <?php endif; ?>
-                        
-                        <?php if ($next) : ?>
-                            <a href="<?php echo $next ?>" class="btn btn-next btn-fill btn-primary btn-wd btn-sm" title="next">
-                                Next
-                                <span class="ml-2">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </a>
-                        <?php endif; ?>
+
+                    <hr class="bg-secondary mt-0 py-3" />
+
+                    <div class="card-body">
+                        <h5 class="text-center"><?php echo $comic["title"] ?></h5>
+
+                        <figure class="mb-1">
+                            <img src="<?php echo $comic['img'] ?>" class="d-block img-fluid m-auto" alt="<?php echo $comic['safe_title'] ?>">
+                            <figcaption class="mt-3 text-center text-muted">
+                                <small><?php echo $comic['alt'] ?></small>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="bg-white border-0 card-footer d-flex justify-content-between">
+                        <div>
+                            <?php if ($previous) : ?>
+                                <a href="<?php echo $previous ?>" class="btn btn-secondary btn-sm px-3 px-sm-4 text-white" role="button">
+                                    PREVIOUS
+                                </a>
+                            <?php endif; ?>
+                        </div>
+
+                        <div>
+                            <?php if ($next) : ?>
+                                <a href="<?php echo $next ?>" class="btn btn-warning btn-sm px-4 px-sm-5 text-white" role="button">
+                                    NEXT
+                                </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
