@@ -41,6 +41,6 @@ class HttpService
      */
     public function getPreviousRequest()
     {
-        return $_SERVER['HTTP_REFERER'] ?? "";
+        return $_SERVER['HTTP_REFERER'] ?? '';
     }
 }

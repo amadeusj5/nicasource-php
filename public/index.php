@@ -2,7 +2,7 @@
 
 $request = $_SERVER['REQUEST_URI'];
 
-if ($request == '/' || $request == '') {
+if ($request === '/' || $request === '') {
     define('COMIC_ID', null);
     require_once dirname(__DIR__) . '/app/views/comic.php';
     return;
@@ -17,4 +17,7 @@ if (preg_match('/^\/comic\/(?P<id>\d+)$/i', $request, $matches)) {
     }
 
     require_once dirname(__DIR__) . '/app/views/comic.php';
+    return;
 }
+
+require_once dirname(__DIR__) . '/app/views/404.php';

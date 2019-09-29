@@ -62,6 +62,12 @@ class ComicService
     private function transform(array $comic, int $comic_id = null)
     {
         if (empty($comic)) {
+            $today_comic = $this->getComicOfTheDay();
+
+            if ($comic_id > $today_comic['num']) {
+                $this->abortTo('/');
+            }
+
             $previous_comic_id = $this->getPreviouslyRequestedComicId();
 
             if (is_null($previous_comic_id) || $previous_comic_id < $comic_id) {
