@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/services/ComicService.php';
+use App\Services\ComicService;
 
 $comic_object = (new ComicService())->get(COMIC_ID);
 

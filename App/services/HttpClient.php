@@ -1,6 +1,8 @@
 <?php
 
-class HttpService
+namespace App\Services;
+
+class HttpClient
 {
     /**
      * Http response data

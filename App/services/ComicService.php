@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/services/HttpClient.php';
+namespace App\Services;
 
 class ComicService
 {
@@ -34,7 +34,7 @@ class ComicService
     /**
      * @return mixed
      */
-    private function getComicOfTheDay()
+    public function getComicOfTheDay()
     {
         return $this->httpClient()->get(self::XKCD_URI . '/info.0.json')->toJson();
     }
@@ -45,7 +45,7 @@ class ComicService
     private function httpClient()
     {
         if (is_null($this->http)) {
-            $this->http = new HttpService();
+            $this->http = new HttpClient();
         }
 
         return $this->http;
@@ -65,16 +65,16 @@ class ComicService
             $today_comic = $this->getComicOfTheDay();
 
             if ($comic_id > $today_comic['num']) {
-                $this->abortTo('/');
+                return $this->abortTo('/');
             }
 
             $previous_comic_id = $this->getPreviouslyRequestedComicId();
 
             if (is_null($previous_comic_id) || $previous_comic_id < $comic_id) {
-                $this->abortTo('/comic/' . ($comic_id + 1));
+                return $this->abortTo('/comic/' . ($comic_id + 1));
             }
 
-            $this->abortTo('/comic/' . ($comic_id - 1));
+            return $this->abortTo('/comic/' . ($comic_id - 1));
         }
 
         return [
@@ -144,6 +144,6 @@ class ComicService
     protected function abortTo($url)
     {
         header("Location: $url");
-        die;
+        return [];
     }
 }
